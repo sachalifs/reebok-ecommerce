@@ -37,18 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function productsInCart() {
-        return $this->hasMany('App\ProductInCart');
-    }
-
-    public function cartTotal() {
-        $total = $this->productsInCart->reduce(function ($acum, $productInCart) {
-            return $acum + ($productInCart->product->price * $productInCart->count);
-        });
-
-        return $total;
-    }
-
     public function orders() {
         return $this->hasMany('App\Order');
     }
